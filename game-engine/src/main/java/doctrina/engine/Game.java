@@ -23,17 +23,18 @@ public class Game {
 
     private JPanel panel;
 
-    private Ball ball = new Ball(25);
+    private Ball ball;
 
     public Game() {
         initFrame();
         initPanel();
+        ball = new Ball(25);
     }
 
     public void start() {
         frame.setVisible(true);
 
-        before = System.currentTimeMillis();
+        updateSyncTime();
 
         while (playing) {
             img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -62,7 +63,7 @@ public class Game {
             sleep = 4;
         }
         Thread.sleep(sleep);
-        before = System.currentTimeMillis();
+        updateSyncTime();
     }
 
     private void drawBufferOnScreen() {
@@ -84,6 +85,10 @@ public class Game {
         if (ball.hasTouched()) {
             score += 10;
         }
+    }
+
+    private void updateSyncTime() {
+        before = System.currentTimeMillis();
     }
 
     private void initFrame() {
