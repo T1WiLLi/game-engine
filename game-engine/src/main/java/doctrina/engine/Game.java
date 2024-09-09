@@ -37,30 +37,14 @@ public class Game {
         updateSyncTime();
 
         while (playing) {
-            img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
-
-            bufferEngine = img.createGraphics();
-            bufferEngine.setRenderingHints(getHints());
+            initGraphicsEngine();
 
             update();
             drawOnBuffer();
             drawBufferOnScreen();
 
-            try {
-                sleep();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep();
         }
-    }
-
-    private void sleep() throws InterruptedException {
-        long sleep = SLEEP - (System.currentTimeMillis() - before);
-        if (sleep < 4) {
-            sleep = 4;
-        }
-        Thread.sleep(sleep);
-        updateSyncTime();
     }
 
     private void drawBufferOnScreen() {
@@ -82,6 +66,31 @@ public class Game {
         if (ball.hasTouched()) {
             score += 10;
         }
+    }
+
+    private void sleep() {
+        long sleep = getSleep();
+
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        updateSyncTime();
+    }
+
+    private long getSleep() {
+        long sleep = SLEEP - (System.currentTimeMillis() - before);
+        if (sleep < 4) {
+            sleep = 4;
+        }
+        return sleep;
+    }
+
+    private void initGraphicsEngine() {
+        img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
+        bufferEngine = img.createGraphics();
+        bufferEngine.setRenderingHints(getHints());
     }
 
     private RenderingHints getHints() {
