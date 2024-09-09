@@ -53,7 +53,7 @@ public class Ball {
     }
 
     private boolean hasTouchedVertical() {
-        return y <= 0 || y >= 600 - this.radius * 2 - this.radius;
+        return y <= 0 || y >= 600 - this.radius * 2;
     }
 
     private boolean hasTouchedHorizontal() {

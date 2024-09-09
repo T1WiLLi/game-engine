@@ -9,9 +9,12 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GameWindow extends JFrame {
+public class Game {
 
     private static final int SLEEP = 25;
+
+    private JFrame frame;
+
     private boolean playing = true;
     private BufferedImage img;
     private Graphics2D bufferEngine;
@@ -22,29 +25,18 @@ public class GameWindow extends JFrame {
 
     private Ball ball = new Ball(25);
 
-    public GameWindow() {
-        setSize(800, 600);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setTitle("Game-engine");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setState(JFrame.NORMAL);
-
-        this.panel = new JPanel();
-        this.panel.setBackground(Color.BLUE);
-        this.panel.setFocusable(true);
-        this.panel.setDoubleBuffered(true);
-
-        add(panel);
+    public Game() {
+        initFrame();
+        initPanel();
     }
 
     public void start() {
-        setVisible(true);
+        frame.setVisible(true);
 
         before = System.currentTimeMillis();
 
         while (playing) {
-            img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+            img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
             RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
             hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -92,5 +84,24 @@ public class GameWindow extends JFrame {
         if (ball.hasTouched()) {
             score += 10;
         }
+    }
+
+    private void initFrame() {
+        frame = new JFrame();
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setTitle("Game-engine");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setState(JFrame.NORMAL);
+        frame.setUndecorated(true);
+    }
+
+    private void initPanel() {
+        this.panel = new JPanel();
+        this.panel.setBackground(Color.BLUE);
+        this.panel.setFocusable(true);
+        this.panel.setDoubleBuffered(true);
+        frame.add(panel);
     }
 }
