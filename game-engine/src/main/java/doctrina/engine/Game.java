@@ -2,59 +2,35 @@ package doctrina.engine;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Game {
 
     private static final int SLEEP = 25;
 
-    private JFrame frame;
-
-    private boolean playing = true;
-    private BufferedImage img;
-    private Graphics2D bufferEngine;
     private long before;
+    private boolean playing = true;
+    private RenderingEngine renderingEngine;
     private int score = 0;
-
-    private JPanel panel;
-
     private Ball ball;
 
     public Game() {
-        initFrame();
-        initPanel();
+        renderingEngine = new RenderingEngine();
         ball = new Ball(25);
     }
 
     public void start() {
-        frame.setVisible(true);
-
+        renderingEngine.start();
         updateSyncTime();
 
         while (playing) {
-            initGraphicsEngine();
-
             update();
-            drawOnBuffer();
-            drawBufferOnScreen();
-
+            drawOnBuffer(renderingEngine.buildBufferEngine());
+            renderingEngine.drawBufferOnScreen();
             sleep();
         }
     }
 
-    private void drawBufferOnScreen() {
-        Graphics2D graphics2d = (Graphics2D) panel.getGraphics();
-        graphics2d.drawImage(img, 0, 0, panel);
-        Toolkit.getDefaultToolkit().sync();
-        graphics2d.dispose();
-    }
-
-    private void drawOnBuffer() {
+    private void drawOnBuffer(Graphics2D bufferEngine) {
         ball.draw(bufferEngine);
 
         bufferEngine.setPaint(Color.WHITE);
@@ -87,39 +63,7 @@ public class Game {
         return sleep;
     }
 
-    private void initGraphicsEngine() {
-        img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
-        bufferEngine = img.createGraphics();
-        bufferEngine.setRenderingHints(getHints());
-    }
-
-    private RenderingHints getHints() {
-        RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        return hints;
-    }
-
     private void updateSyncTime() {
         before = System.currentTimeMillis();
-    }
-
-    private void initFrame() {
-        frame = new JFrame();
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setTitle("Game-engine");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setState(JFrame.NORMAL);
-        frame.setUndecorated(true);
-    }
-
-    private void initPanel() {
-        this.panel = new JPanel();
-        this.panel.setBackground(Color.BLUE);
-        this.panel.setFocusable(true);
-        this.panel.setDoubleBuffered(true);
-        frame.add(panel);
     }
 }
