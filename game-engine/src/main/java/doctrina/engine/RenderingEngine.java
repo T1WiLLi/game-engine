@@ -29,11 +29,11 @@ public class RenderingEngine {
         frame.dispose();
     }
 
-    public Graphics2D buildBufferEngine() {
+    public Canvas buildCanvas() {
         img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
         bufferEngine = img.createGraphics();
         bufferEngine.setRenderingHints(getHints());
-        return bufferEngine;
+        return new Canvas(bufferEngine);
     }
 
     public void drawBufferOnScreen() {

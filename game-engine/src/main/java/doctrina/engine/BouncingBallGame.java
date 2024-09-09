@@ -1,9 +1,8 @@
 package doctrina.engine;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
-public class BouncingBallGame extends Game {
+public final class BouncingBallGame extends Game {
 
     private int score = 0;
     private Ball ball;
@@ -22,10 +21,8 @@ public class BouncingBallGame extends Game {
     }
 
     @Override
-    public void drawOnBuffer(Graphics2D bufferEngine) {
-        ball.draw(bufferEngine);
-
-        bufferEngine.setPaint(Color.WHITE);
-        bufferEngine.drawString("Score: " + score, ball.getX() - 15, ball.getY() - 15);
+    public void render(Canvas canvas) {
+        ball.render(canvas);
+        canvas.renderString("Score: " + score, ball.getX() - 15, ball.getY() - 15, Color.WHITE);
     }
 }

@@ -1,7 +1,5 @@
 package doctrina.engine;
 
-import java.awt.Graphics2D;
-
 public abstract class Game {
 
     private static final int SLEEP = 25;
@@ -13,20 +11,23 @@ public abstract class Game {
 
     protected abstract void update();
 
-    protected abstract void drawOnBuffer(Graphics2D graphics2D);
+    protected abstract void render(Canvas canvas);
 
     public Game() {
         renderingEngine = new RenderingEngine();
     }
 
-    protected void start() {
+    public final void start() {
         init();
+        run();
+    }
+
+    private void run() {
         renderingEngine.start();
         updateSyncTime();
-
         while (playing) {
             update();
-            drawOnBuffer(renderingEngine.buildBufferEngine());
+            render(renderingEngine.buildCanvas());
             renderingEngine.drawBufferOnScreen();
             sleep();
         }

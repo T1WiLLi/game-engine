@@ -1,7 +1,6 @@
 package doctrina.engine;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Ball {
@@ -39,9 +38,8 @@ public class Ball {
         }
     }
 
-    public void draw(Graphics2D bufferEngine) {
-        bufferEngine.setPaint(Color.RED);
-        bufferEngine.fillOval(x, y, this.radius * 2, this.radius * 2);
+    public void render(Canvas canvas) {
+        canvas.renderCircle(x, y, this.radius, Color.RED);
     }
 
     public int getX() {
