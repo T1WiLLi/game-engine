@@ -1,24 +1,26 @@
 package doctrina.engine;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Game {
+public abstract class Game {
 
     private static final int SLEEP = 25;
-
+    private RenderingEngine renderingEngine;
     private long before;
     private boolean playing = true;
-    private RenderingEngine renderingEngine;
-    private int score = 0;
-    private Ball ball;
+
+    protected abstract void init();
+
+    protected abstract void update();
+
+    protected abstract void drawOnBuffer(Graphics2D graphics2D);
 
     public Game() {
         renderingEngine = new RenderingEngine();
-        ball = new Ball(25);
     }
 
-    public void start() {
+    protected void start() {
+        init();
         renderingEngine.start();
         updateSyncTime();
 
@@ -27,20 +29,6 @@ public class Game {
             drawOnBuffer(renderingEngine.buildBufferEngine());
             renderingEngine.drawBufferOnScreen();
             sleep();
-        }
-    }
-
-    private void drawOnBuffer(Graphics2D bufferEngine) {
-        ball.draw(bufferEngine);
-
-        bufferEngine.setPaint(Color.WHITE);
-        bufferEngine.drawString("Score: " + score, ball.getX() - 15, ball.getY() - 15);
-    }
-
-    private void update() {
-        ball.update();
-        if (ball.hasTouched()) {
-            score += 10;
         }
     }
 
