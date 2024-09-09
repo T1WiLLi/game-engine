@@ -38,12 +38,9 @@ public class Game {
 
         while (playing) {
             img = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
-            RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
             bufferEngine = img.createGraphics();
-            bufferEngine.setRenderingHints(hints);
+            bufferEngine.setRenderingHints(getHints());
 
             update();
             drawOnBuffer();
@@ -85,6 +82,13 @@ public class Game {
         if (ball.hasTouched()) {
             score += 10;
         }
+    }
+
+    private RenderingHints getHints() {
+        RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        return hints;
     }
 
     private void updateSyncTime() {
