@@ -1,4 +1,4 @@
-package doctrina.engine;
+package doctrina.engine.engine;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
@@ -22,6 +22,7 @@ public class Canvas {
     }
 
     public void renderRectangle(int x, int y, int width, int height, Color color) {
+        this.graphics2D.setPaint(color);
         this.graphics2D.drawRect(x, y, width, height);
     }
 

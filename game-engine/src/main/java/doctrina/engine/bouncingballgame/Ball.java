@@ -1,7 +1,9 @@
-package doctrina.engine;
+package doctrina.engine.bouncingballgame;
 
 import java.awt.Color;
 import java.util.Random;
+
+import doctrina.engine.engine.Canvas;
 
 public class Ball {
 

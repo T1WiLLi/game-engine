@@ -1,6 +1,9 @@
-package doctrina.engine;
+package doctrina.engine.bouncingballgame;
 
 import java.awt.Color;
+
+import doctrina.engine.engine.Canvas;
+import doctrina.engine.engine.Game;
 
 public final class BouncingBallGame extends Game {
 

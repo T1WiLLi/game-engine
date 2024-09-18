@@ -1,4 +1,4 @@
-package doctrina.engine;
+package doctrina.engine.engine;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
