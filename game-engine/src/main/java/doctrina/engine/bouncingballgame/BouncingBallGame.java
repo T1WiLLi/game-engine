@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import doctrina.engine.engine.Canvas;
 import doctrina.engine.engine.Game;
+import doctrina.engine.engine.GameTime;
 
 public final class BouncingBallGame extends Game {
 
@@ -26,6 +27,8 @@ public final class BouncingBallGame extends Game {
     @Override
     public void render(Canvas canvas) {
         ball.render(canvas);
+        canvas.renderString("Current time: " + GameTime.getInstance().getFormattedElapsedTime(), 10, 10, Color.white);
+        canvas.renderString("FPS: " + GameTime.getInstance().getCurrentFps(), 10, 30, Color.white);
         canvas.renderString("Score: " + score, ball.getX() - 15, ball.getY() - 15, Color.WHITE);
     }
 }
