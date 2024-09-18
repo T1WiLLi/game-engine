@@ -23,7 +23,7 @@ public class Canvas {
 
     public void renderRectangle(int x, int y, int width, int height, Color color) {
         this.graphics2D.setPaint(color);
-        this.graphics2D.drawRect(x, y, width, height);
+        this.graphics2D.fillRect(x, y, width, height);
     }
 
     public Graphics2D getGraphics2D() {

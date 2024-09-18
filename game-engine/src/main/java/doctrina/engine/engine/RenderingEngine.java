@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.event.KeyListener;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
@@ -41,6 +42,10 @@ public class RenderingEngine {
         graphics2d.drawImage(img, 0, 0, panel);
         Toolkit.getDefaultToolkit().sync();
         graphics2d.dispose();
+    }
+
+    public void addKeyListener(KeyListener keyListener) {
+        panel.addKeyListener(keyListener);
     }
 
     private RenderingHints getHints() {

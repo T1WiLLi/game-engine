@@ -1,5 +1,7 @@
 package doctrina.engine.engine;
 
+import java.awt.event.KeyListener;
+
 public abstract class Game {
 
     private RenderingEngine renderingEngine;
@@ -11,6 +13,8 @@ public abstract class Game {
 
     protected abstract void render(Canvas canvas);
 
+    protected abstract void conclude();
+
     public Game() {
         renderingEngine = new RenderingEngine();
     }
@@ -18,6 +22,15 @@ public abstract class Game {
     public final void start() {
         init();
         run();
+        conclude();
+    }
+
+    public final void stop() {
+        playing = false;
+    }
+
+    public void addKeyListener(KeyListener keyListener) {
+        renderingEngine.addKeyListener(keyListener);
     }
 
     private void run() {

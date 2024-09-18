@@ -31,4 +31,9 @@ public final class BouncingBallGame extends Game {
         canvas.renderString("FPS: " + GameTime.getInstance().getCurrentFps(), 10, 30, Color.white);
         canvas.renderString("Score: " + score, ball.getX() - 15, ball.getY() - 15, Color.WHITE);
     }
+
+    @Override
+    protected void conclude() {
+
+    }
 }
