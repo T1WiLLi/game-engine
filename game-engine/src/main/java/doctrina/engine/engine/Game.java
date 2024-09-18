@@ -42,5 +42,6 @@ public abstract class Game {
             renderingEngine.drawBufferOnScreen();
             GameTime.getInstance().sync();
         }
+        renderingEngine.stop();
     }
 }

@@ -41,7 +41,7 @@ public abstract class Controller implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        pressedKeys.putIfAbsent(e.getKeyCode(), true);
+        pressedKeys.computeIfPresent(e.getKeyCode(), (k, v) -> true);
     }
 
     @Override
