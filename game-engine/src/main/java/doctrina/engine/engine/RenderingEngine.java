@@ -10,15 +10,20 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class RenderingEngine {
+public final class RenderingEngine {
+
+    private static RenderingEngine instance;
+
     private JFrame frame;
     private JPanel panel;
     private BufferedImage img;
     private Graphics2D bufferEngine;
 
-    public RenderingEngine() {
-        initFrame();
-        initPanel();
+    public static RenderingEngine getInstance() {
+        if (instance == null) {
+            instance = new RenderingEngine();
+        }
+        return instance;
     }
 
     public void start() {
@@ -46,6 +51,11 @@ public class RenderingEngine {
 
     public void addKeyListener(KeyListener keyListener) {
         panel.addKeyListener(keyListener);
+    }
+
+    private RenderingEngine() {
+        initFrame();
+        initPanel();
     }
 
     private RenderingHints getHints() {

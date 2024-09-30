@@ -46,6 +46,6 @@ public abstract class Controller implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        pressedKeys.computeIfPresent(e.getKeyCode(), (k, v) -> null);
+        pressedKeys.computeIfPresent(e.getKeyCode(), (k, v) -> false);
     }
 }

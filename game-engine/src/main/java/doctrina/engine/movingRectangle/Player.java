@@ -3,6 +3,7 @@ package doctrina.engine.movingRectangle;
 import java.awt.Color;
 
 import doctrina.engine.engine.Canvas;
+import doctrina.engine.engine.RenderingEngine;
 
 public class Player {
     private int x, y, speed;
@@ -11,6 +12,7 @@ public class Player {
 
     public Player(Gamepad gamepad) {
         this.gamepad = gamepad;
+        RenderingEngine.getInstance().addKeyListener(gamepad);
         this.x = 200;
         this.y = 200;
         this.speed = 3;

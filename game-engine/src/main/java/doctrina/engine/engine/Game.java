@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 
 public abstract class Game {
 
-    private RenderingEngine renderingEngine;
+    private final RenderingEngine renderingEngine;
     private boolean playing = true;
 
     protected abstract void init();
@@ -16,7 +16,7 @@ public abstract class Game {
     protected abstract void conclude();
 
     public Game() {
-        renderingEngine = new RenderingEngine();
+        renderingEngine = RenderingEngine.getInstance();
     }
 
     public final void start() {
