@@ -29,6 +29,7 @@ public abstract class Game {
         playing = false;
     }
 
+    @Deprecated
     public void addKeyListener(KeyListener keyListener) {
         renderingEngine.addKeyListener(keyListener);
     }

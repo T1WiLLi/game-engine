@@ -14,7 +14,7 @@ public class MovementController extends Controller {
         bindKeys(keys);
     }
 
-    public Direction getDirection() {
+    public Direction getDirection() { // Prevent diagonal movement
         if (isLeftPressed()) {
             return Direction.LEFT;
         }
