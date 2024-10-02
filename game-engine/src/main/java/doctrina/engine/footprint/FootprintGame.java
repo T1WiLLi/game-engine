@@ -10,14 +10,19 @@ import doctrina.engine.engine.Game;
 
 public class FootprintGame extends Game {
     private Gamepad gamepad;
+    private Gamepad gamepad2;
 
     private Player player;
+    private Player player2;
     private List<Footprint> footprints = new ArrayList<>();
 
     @Override
     protected void init() {
         gamepad = new Gamepad();
+        gamepad2 = new Gamepad();
+        gamepad2.useArrow();
         this.player = new Player(gamepad);
+        this.player2 = new Player(gamepad2);
     }
 
     @Override
@@ -25,9 +30,16 @@ public class FootprintGame extends Game {
         if (gamepad.isQuitPressed()) {
             stop();
         }
+        if (gamepad2.isQuitPressed()) {
+            stop();
+        }
         player.update();
+        player2.update();
         if (gamepad.isMoving()) {
             footprints.add(player.createFootprint());
+        }
+        if (gamepad2.isMoving()) {
+            footprints.add(player2.createFootprint());
         }
     }
 
@@ -36,6 +48,7 @@ public class FootprintGame extends Game {
         canvas.renderRectangle(0, 0, 800, 600, Color.BLUE);
         footprints.forEach(fp -> fp.render(canvas));
         player.render(canvas);
+        player2.render(canvas);
     }
 
     @Override

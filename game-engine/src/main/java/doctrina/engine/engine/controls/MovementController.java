@@ -14,6 +14,13 @@ public class MovementController extends Controller {
         bindKeys(keys);
     }
 
+    public void useArrow() {
+        setUpKey(KeyEvent.VK_UP);
+        setDownKey(KeyEvent.VK_DOWN);
+        setLeftKey(KeyEvent.VK_LEFT);
+        setRightKey(KeyEvent.VK_RIGHT);
+    }
+
     public Direction getDirection() { // Prevent diagonal movement
         if (isLeftPressed()) {
             return Direction.LEFT;
