@@ -1,6 +1,9 @@
 package doctrina.engine.engine;
 
 import java.awt.Graphics2D;
+
+import doctrina.engine.engine.entities.StaticEntity;
+
 import java.awt.Color;
 
 public class Canvas {
@@ -24,6 +27,11 @@ public class Canvas {
     public void renderRectangle(int x, int y, int width, int height, Color color) {
         this.graphics2D.setPaint(color);
         this.graphics2D.fillRect(x, y, width, height);
+    }
+
+    public void renderRectangle(StaticEntity entity, Color color) {
+        this.graphics2D.setPaint(color);
+        this.graphics2D.fillRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
     }
 
     public Graphics2D getGraphics2D() {

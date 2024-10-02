@@ -13,7 +13,7 @@ public class Footprint extends StaticEntity {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.renderRectangle(x, y, width, height, new Color(getRandomValue(), getRandomValue(), getRandomValue()));
+        canvas.renderRectangle(this, new Color(getRandomValue(), getRandomValue(), getRandomValue()));
     }
 
     private int getRandomValue() {

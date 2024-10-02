@@ -7,51 +7,29 @@ import java.util.ArrayList;
 
 import doctrina.engine.engine.Canvas;
 import doctrina.engine.engine.RenderingEngine;
+import doctrina.engine.engine.entities.MovableEntity;
 
-public class Player {
-    private int x, y, speed;
-
+public class Player extends MovableEntity {
     private Gamepad gamepad;
     private List<Footprint> footprints = new ArrayList<>();
 
     public Player(Gamepad gamepad) {
         this.gamepad = gamepad;
         RenderingEngine.getInstance().addKeyListener(gamepad);
-        this.x = 200;
-        this.y = 200;
+        teleport(200, 200);
+        setDimension(20, 60);
         this.speed = 3;
     }
 
     public void update() {
-        float dx = 0;
-        float dy = 0;
-
-        if (gamepad.isUpPressed()) {
-            dy -= speed;
+        if (gamepad.isMoving()) {
+            move(gamepad.getDirection());
         }
-        if (gamepad.isDownPressed()) {
-            dy += speed;
-        }
-        if (gamepad.isLeftPressed()) {
-            dx -= speed;
-        }
-        if (gamepad.isRightPressed()) {
-            dx += speed;
-        }
-
-        float length = (float) Math.sqrt(dx * dx + dy * dy);
-        if (length != 0) {
-            dx /= length;
-            dy /= length;
-        }
-
-        x += dx * speed;
-        y += dy * speed;
     }
 
     public void render(Canvas canvas) {
         footprints.forEach(fp -> fp.render(canvas));
-        canvas.renderRectangle(x, y, 20, 60, Color.WHITE);
+        canvas.renderRectangle(x, y, width, height, Color.WHITE);
     }
 
     public Footprint createFootprint() {
