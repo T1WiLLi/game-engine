@@ -42,4 +42,12 @@ public abstract class MovableEntity extends StaticEntity {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
+
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }
