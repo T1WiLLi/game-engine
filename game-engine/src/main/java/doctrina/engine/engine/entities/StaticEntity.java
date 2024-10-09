@@ -1,6 +1,7 @@
 package doctrina.engine.engine.entities;
 
 import doctrina.engine.engine.Canvas;
+import java.awt.Rectangle;
 
 public abstract class StaticEntity {
 
@@ -16,6 +17,14 @@ public abstract class StaticEntity {
     public void setDimension(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public boolean intersect(StaticEntity other) {
+        return getBounds().intersects(other.getBounds());
+    }
+
+    protected Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 
     public int getX() {
